@@ -94,8 +94,8 @@ Results Displayed to User
 ## Machine Learning
 
 The system uses a trained machine learning classification model to classify emails as:
-•	Safe Email
-•	Phishing Email
+- Safe Email
+- Phishing Email
 Email text is converted into numerical features using a TF-IDF vectorizer before being passed to the trained model.
 The trained model and vectorizer are stored in the `model` directory.
 
@@ -103,16 +103,17 @@ The trained model and vectorizer are stored in the `model` directory.
 
 In addition to machine learning, the system performs rule-based security checks.
 It looks for:
-•	Urgent or threatening language
-•	Requests for passwords or login information
-•	Financial or payment-related language
-•	Prize and reward-related language
-•	Suspicious URLs
-•	IP addresses used instead of domain names
-•	URL shortening services
-•	Punycode domains
-•	Excessive subdomains
-•	Suspicious words in URLs
+- 	Urgent or threatening language
+- 	Requests for passwords or login information
+- 	Financial or payment-related language
+- 	Prize and reward-related language
+- 	Suspicious URLs
+- 	IP addresses used instead of domain names
+- 	URL shortening services
+- 	Punycode domains
+- 	Excessive subdomains
+- 	Suspicious words in URLs
+
 The rule-based analysis contributes up to 30 points to the overall risk score.
 
 ## Risk Score
@@ -121,7 +122,6 @@ The final risk score is calculated by combining the machine learning phishing pr
 
 ### Risk Levels
 
-|------------|-------------|
 | Risk Score | Risk Level  |
 |------------|-------------|
 | 70–100     | High Risk   |
@@ -136,9 +136,9 @@ The machine learning probability contributes up to 70 points, while rule-based s
 ## Email Input Methods
 
 The system supports two methods of analysis:
-### ✯ 1. Paste Email Text ✯ 
+ ✯ 1. Paste Email Text ✯ 
 Users can paste the contents of an email directly into the text area and click:
-### ✯ 2. Upload Email File ✯ 
+ ✯ 2. Upload Email File ✯ 
 Users can upload email files in the following formats:
 - `.eml`
 - `.txt`
@@ -148,10 +148,10 @@ The uploaded content is processed through the same detection pipeline.
 
 The trained model was evaluated using a separate test dataset.
 The evaluation results were:
-•	Accuracy: 98.03%
-•	Precision: 97.55%
-•	Recall: 97.18%
-•	F1-Score: 97.37%
+- Accuracy: 98.03%
+- Precision: 97.55%
+- Recall: 97.18%
+- F1-Score: 97.37%
 These results indicate that the trained model performs well on the evaluation dataset.
 
 ## Backend Implementation
@@ -178,17 +178,17 @@ security_checks.py
 ## Installation
 
 Clone or download the repository and install the required Python packages:
-## pip install -r requirements.txt
+ pip install -r requirements.txt
 A virtual environment can be used to isolate the project dependencies.
 
 ## How to Run
 
 1. Activate the virtual environment on Windows PowerShell:
-## venv\Scripts\Activate.ps1
+venv\Scripts\Activate.ps1
 2. Start the Flask application:
-## python app.py
+python app.py
 3. Open a web browser and visit:
-## http://127.0.0.1:5000
+http://127.0.0.1:5000
 
 ## How to Use
 
@@ -205,10 +205,12 @@ A virtual environment can be used to isolate the project dependencies.
 ## Testing
 
 The system was tested using different types of email input:
+
 1. Safe email
 2. Phishing email
 3. EML file
 4. TXT file
+
 The tests were performed to verify the classification, risk assessment, file processing, indicator detection, and result display.
 
 ## Limitations
@@ -221,21 +223,21 @@ The system does not guarantee that every phishing email will be detected.
 ## Future Improvements
 
 Possible future improvements include:
-•	More advanced email header analysis 
-•	Improved URL reputation checking 
-•	Real-time threat intelligence integration 
-•	Detection of malicious attachments 
-•	Deep learning-based classification 
-•	Improved handling of HTML email content 
-•	Larger and more diverse training datasets 
+- More advanced email header analysis
+- Improved URL reputation checking
+- Real-time threat intelligence integration
+- Detection of malicious attachments
+- Deep learning-based classification
+- Improved handling of HTML email content
+- Larger and more diverse training datasets 
 
 ## Deployment
 
 The application is currently deployed locally using the Flask development server.
 It can be started using:
-## python app.py
+python app.py
 The application is then accessible through:
-## http://127.0.0.1:5000
+http://127.0.0.1:5000
 The trained model and TF-IDF vectorizer are loaded from the project's model directory when the Flask application starts.
 
 ## Conclusion
