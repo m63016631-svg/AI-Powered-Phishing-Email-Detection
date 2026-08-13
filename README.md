@@ -67,18 +67,18 @@ The main objectives of this project are:
 
 The system follows the following processing flow:
 
-	User Email
-	Email Text / File Upload
-	Flask Backend
-	TF-IDF Feature Extraction
-	Machine Learning Classification
-	Phishing Probability
-	Rule-Based Security Analysis
-	URL Analysis
-	Combined Risk Score
-	Risk Level
-	Security Recommendation
-	Results Displayed to User
+1. User Email
+2. Email Text / File Upload
+3. Flask Backend
+4. TF-IDF Feature Extraction
+5. Machine Learning Classification
+6. Phishing Probability
+7. Rule-Based Security Analysis
+8. URL Analysis
+9. Combined Risk Score
+10. Risk Level
+11. Security Recommendation
+12. Results Displayed to User
 
 ## Machine Learning
 
