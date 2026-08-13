@@ -133,6 +133,7 @@ Users can paste the contents of an email directly into the text area and click:
 Users can upload email files in the following formats:
 - `.eml`
 - `.txt`
+
 The uploaded content is processed through the same detection pipeline.
 
 ## Model Performance
@@ -143,6 +144,7 @@ The evaluation results were:
 - Precision: 97.55%
 - Recall: 97.18%
 - F1-Score: 97.37%
+
 These results indicate that the trained model performs well on the evaluation dataset.
 
 ## Backend Implementation
@@ -163,6 +165,7 @@ The Flask backend:
 11.	Determines the risk level. 
 12.	Generates a security recommendation. 
 13.	Returns the analysis results to the web interface. 
+
 The rule-based analysis is implemented in:
 security_checks.py
 
