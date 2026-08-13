@@ -164,7 +164,7 @@ The Flask backend:
 10.	Calculates the combined risk score. 
 11.	Determines the risk level. 
 12.	Generates a security recommendation. 
-13.	Returns the analysis results to the web interface. 
+13.	Returns the analysis results to the web interface.
 
 The rule-based analysis is implemented in:
 security_checks.py
@@ -172,7 +172,8 @@ security_checks.py
 ## Installation
 
 Clone or download the repository and install the required Python packages:
- pip install -r requirements.txt
+-  pip install -r requirements.txt
+
 A virtual environment can be used to isolate the project dependencies.
 
 ## How to Run
