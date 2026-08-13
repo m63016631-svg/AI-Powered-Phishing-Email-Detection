@@ -67,29 +67,18 @@ The main objectives of this project are:
 
 The system follows the following processing flow:
 
-User Email
-↓
-Email Text / File Upload
-↓
-Flask Backend
-↓
-TF-IDF Feature Extraction
-↓
-Machine Learning Classification
-↓
-Phishing Probability
-↓
-Rule-Based Security Analysis
-↓
-URL Analysis
-↓
-Combined Risk Score
-↓
-Risk Level
-↓
-Security Recommendation
-↓
-Results Displayed to User
+	User Email
+	Email Text / File Upload
+	Flask Backend
+	TF-IDF Feature Extraction
+	Machine Learning Classification
+	Phishing Probability
+	Rule-Based Security Analysis
+	URL Analysis
+	Combined Risk Score
+	Risk Level
+	Security Recommendation
+	Results Displayed to User
 
 ## Machine Learning
 
@@ -131,6 +120,7 @@ The final risk score is calculated by combining the machine learning phishing pr
 | 40–69      | Medium Risk |
 
 | 0–39       | Safe        |
+|------------|-------------|
 
 The machine learning probability contributes up to 70 points, while rule-based security checks contribute up to 30 points.
 
