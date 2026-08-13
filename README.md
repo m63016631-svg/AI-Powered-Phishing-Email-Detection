@@ -127,9 +127,11 @@ The machine learning probability contributes up to 70 points, while rule-based s
 ## Email Input Methods
 
 The system supports two methods of analysis:
- ✯ 1. Paste Email Text ✯ 
+- 1. ✯ Paste Email Text ✯
+
 Users can paste the contents of an email directly into the text area and click:
- ✯ 2. Upload Email File ✯ 
+- 2. ✯ Upload Email File ✯
+
 Users can upload email files in the following formats:
 - `.eml`
 - `.txt`
