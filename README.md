@@ -167,7 +167,7 @@ The Flask backend:
 13.	Returns the analysis results to the web interface.
 
 The rule-based analysis is implemented in:
-security_checks.py
+- security_checks.py
 
 ## Installation
 
@@ -230,9 +230,11 @@ Possible future improvements include:
 
 The application is currently deployed locally using the Flask development server.
 It can be started using:
-python app.py
+- python app.py
+
 The application is then accessible through:
-http://127.0.0.1:5000
+- http://127.0.0.1:5000
+
 The trained model and TF-IDF vectorizer are loaded from the project's model directory when the Flask application starts.
 
 ## Conclusion
@@ -245,6 +247,6 @@ The project demonstrates how machine learning and security rules can be combined
 
 ## Author
 
-Maryam Mushtaq
-Department of Information Technology
-The University of Haripur
+- Maryam Mushtaq
+- Department of Information Technology
+- The University of Haripur
