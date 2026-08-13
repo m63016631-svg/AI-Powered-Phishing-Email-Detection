@@ -94,8 +94,10 @@ Results Displayed to User
 ## Machine Learning
 
 The system uses a trained machine learning classification model to classify emails as:
+
 - Safe Email
 - Phishing Email
+
 Email text is converted into numerical features using a TF-IDF vectorizer before being passed to the trained model.
 The trained model and vectorizer are stored in the `model` directory.
 
@@ -123,13 +125,12 @@ The final risk score is calculated by combining the machine learning phishing pr
 ### Risk Levels
 
 | Risk Score | Risk Level  |
-|------------|-------------|
+
 | 70–100     | High Risk   |
-|------------|-------------|
+
 | 40–69      | Medium Risk |
-|------------|-------------|
+
 | 0–39       | Safe        |
-|------------|-------------|
 
 The machine learning probability contributes up to 70 points, while rule-based security checks contribute up to 30 points.
 
