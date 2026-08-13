@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhishGuard AI | Email Security</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background:
+                radial-gradient(circle at 10% 10%, rgba(37, 99, 235, 0.15), transparent 30%),
+                radial-gradient(circle at 90% 90%, rgba(14, 165, 233, 0.10), transparent 30%),
+                #0d2545;
+            color: #e5eefb;
+            min-height: 100vh;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            height: 72px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            background: rgba(7, 17, 31, 0.82);
+            backdrop-filter: blur(15px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 6%;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: .3px;
+        }
+
+        .brand-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 11px;
+            background: linear-gradient(135deg, #2563eb, #06b6d4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 21px;
+            box-shadow: 0 8px 25px rgba(37,99,235,.35);
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #9fb1c8;
+            font-size: 13px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #22c55e;
+        }
+
+        /* MAIN */
+
+        .page {
+            width: 92%;
+            max-width: 1150px;
+            margin: 45px auto 70px;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 7px 15px;
+            border: 1px solid rgba(59,130,246,.35);
+            background: rgba(37,99,235,.10);
+            color: #60a5fa;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            line-height: 1.15;
+            margin-bottom: 13px;
+            background: linear-gradient(90deg, #ffffff, #93c5fd, #67e8f9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            color: #8fa4bc;
+            font-size: 16px;
+            max-width: 690px;
+            margin: auto;
+            line-height: 1.7;
+        }
+
+        /* MAIN CARD */
+
+        .scan-card {
+            background: rgba(15, 29, 48, 0.82);
+            border: 1px solid rgba(148,163,184,.13);
+            border-radius: 22px;
+            padding: 30px;
+            box-shadow:
+                0 25px 70px rgba(0,0,0,.35),
+                inset 0 1px 0 rgba(255,255,255,.03);
+            backdrop-filter: blur(18px);
+        }
+
+        .section-title {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .section-subtitle {
+            color: #71859d;
+            font-size: 13px;
+            margin-bottom: 18px;
+        }
+
+        /* UPLOAD */
+
+        .upload-box {
+            border: 1.5px dashed #3478e5;
+            background: rgba(37,99,235,.055);
+            border-radius: 16px;
+            padding: 27px;
+            text-align: center;
+            transition: .25s;
+        }
+
+        .upload-box:hover {
+            background: rgba(37,99,235,.10);
+            border-color: #60a5fa;
+        }
+
+        .upload-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            margin: 0 auto 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(37,99,235,.14);
+            font-size: 25px;
+        }
+
+        .upload-box h3 {
+            font-size: 17px;
+            margin-bottom: 7px;
+        }
+
+        .upload-box p {
+            color: #8297ae;
+            font-size: 13px;
+            margin-bottom: 18px;
+        }
+
+        input[type="file"] {
+            width: 100%;
+            max-width: 560px;
+            padding: 10px;
+            border: 1px solid rgba(148,163,184,.18);
+            border-radius: 10px;
+            background: #162d4e;
+            color: #b8c7d9;
+        }
+
+        /* DIVIDER */
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 24px 0;
+            color: #53677e;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: rgba(148,163,184,.13);
+        }
+
+        /* TEXTAREA */
+
+        textarea {
+            width: 100%;
+            min-height: 80px;
+            resize: vertical;
+            overflow: hidden;
+            padding: 18px;
+            border-radius: 14px;
+            border: 1px solid rgba(148,163,184,.18);
+            background: #143153;
+            color: #e5eefb;
+            font-family: "Segoe UI", Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.7;
+            outline: none;
+            transition: .2s;
+        }
+
+        textarea::placeholder {
+            color: #52667d;
+        }
+
+        textarea:focus {
+            border-color: #3478e5;
+            box-shadow: 0 0 0 3px rgba(37,99,235,.10);
+        }
+
+        /* BUTTON */
+
+        .scan-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            margin: 23px auto 4px;
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #2563eb, #0891b2);
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 10px 28px rgba(37,99,235,.28);
+            transition: .2s;
+        }
+
+        .scan-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 35px rgba(37,99,235,.38);
+        }
+
+        /* RESULT */
+
+        .result-card {
+            margin-top: 30px;
+            padding: 28px;
+            border-radius: 18px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,.08);
+        }
+
+        .result-title {
+            font-size: 31px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .result-card.phishing {
+            background: linear-gradient(135deg, rgba(127,29,29,.35), rgba(30,12,18,.65));
+            border-color: rgba(248,113,113,.25);
+            color: #fca5a5;
+        }
+
+        .result-card.medium {
+            background: linear-gradient(135deg, rgba(120,53,15,.35), rgba(35,25,10,.65));
+            border-color: rgba(251,191,36,.25);
+            color: #fcd34d;
+        }
+
+        .result-card.safe {
+            background: linear-gradient(135deg, rgba(20,83,45,.35), rgba(8,35,24,.65));
+            border-color: rgba(74,222,128,.22);
+            color: #86efac;
+        }
+
+        .classification {
+            color: #a9b9ca;
+            font-size: 14px;
+        }
+
+        /* STATS */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: rgba(16, 46, 81, 0.75);
+            border: 1px solid rgba(148,163,184,.11);
+            border-radius: 15px;
+            padding: 23px;
+            text-align: center;
+        }
+
+        .stat-label {
+            color: #778da5;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: .8px;
+            margin-bottom: 9px;
+        }
+
+        .score {
+            font-size: 32px;
+            font-weight: 800;
+            color: #60a5fa;
+        }
+
+        .risk-level {
+            margin-top: 6px;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        /* PROGRESS */
+
+        .progress-section {
+            margin-top: 22px;
+            background: rgba(8,21,36,.65);
+            border: 1px solid rgba(148,163,184,.11);
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            color: #9aacc0;
+            font-size: 13px;
+            margin-bottom: 9px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #18283b;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #22c55e, #f59e0b, #ef4444);
+            border-radius: 20px;
+            transition: width .5s ease;
+        }
+
+        /* DETAILS */
+
+        .details {
+            margin-top: 22px;
+            background: rgba(8,21,36,.65);
+            border: 1px solid rgba(148,163,184,.11);
+            border-radius: 15px;
+            padding: 23px;
+        }
+
+        .details h2 {
+            font-size: 17px;
+            margin-bottom: 16px;
+        }
+
+        .indicator-list {
+            list-style: none;
+        }
+
+        .indicator-list li {
+            background: rgba(249,115,22,.07);
+            border-left: 3px solid #f97316;
+            padding: 12px 14px;
+            margin-bottom: 8px;
+            border-radius: 7px;
+            color: #fdba74;
+            font-size: 14px;
+        }
+
+        .no-indicators {
+            background: rgba(34,197,94,.07);
+            border-left: 3px solid #22c55e;
+            padding: 13px;
+            border-radius: 7px;
+            color: #86efac;
+            font-size: 14px;
+        }
+
+        /* URL */
+
+        .url-box {
+            margin-top: 20px;
+            background: rgba(8,21,36,.65);
+            border: 1px solid rgba(148,163,184,.11);
+            padding: 22px;
+            border-radius: 15px;
+        }
+
+        .url-box h2 {
+            font-size: 17px;
+            margin-bottom: 14px;
+        }
+
+        .url-box ul {
+            padding-left: 20px;
+        }
+
+        .url-box li {
+            color: #93c5fd;
+            margin-bottom: 8px;
+            word-break: break-all;
+            font-size: 13px;
+        }
+
+        /* RECOMMENDATION */
+
+        .recommendation {
+            margin-top: 20px;
+            background: rgba(37,99,235,.08);
+            border: 1px solid rgba(59,130,246,.18);
+            border-left: 4px solid #3b82f6;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .recommendation h2 {
+            font-size: 17px;
+            color: #93c5fd;
+            margin-bottom: 8px;
+        }
+
+        .recommendation p {
+            color: #a9b9ca;
+            line-height: 1.7;
+            font-size: 14px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+            color: #50647b;
+            font-size: 12px;
+            margin-top: 35px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .scan-card {
+                padding: 20px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar {
+                padding: 0 4%;
+            }
+
+            .status {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<nav class="navbar">
+    <div class="brand">
+        <div class="brand-icon">🛡️</div>
+        <span>PhishGuard AI</span>
+    </div>
+
+    <div class="status">
+        <span class="status-dot"></span>
+        Detection Engine Online
+    </div>
+</nav>
+
+
+<main class="page">
+
+    <!-- HERO -->
+    <section class="hero">
+
+        <div class="hero-badge">
+            AI-Powered Email Security
+        </div>
+
+        <h1>Detect Phishing Before It<br>Becomes a Threat</h1>
+
+        <p>
+            Analyze suspicious emails using machine learning and
+            rule-based security intelligence to identify phishing
+            indicators and calculate an overall risk level.
+        </p>
+
+    </section>
+
+
+    <!-- SCANNER -->
+    <div class="scan-card">
+
+        <div class="section-title">
+            🔍 Email Security Scanner
+        </div>
+
+        <div class="section-subtitle">
+            Upload an email file or paste its contents below for analysis.
+        </div>
+
+
+        <!-- UPLOAD -->
+        <div class="upload-box">
+
+            <div class="upload-icon">
+                📧
+            </div>
+
+            <h3>Upload Email File</h3>
+
+            <p>
+                Supported formats: <strong>.eml</strong> and
+                <strong>.txt</strong>
+            </p>
+
+            <input
+                type="file"
+                name="email_file"
+                accept=".eml,.txt"
+                form="emailForm"
+            >
+
+        </div>
+
+
+        <div class="divider">
+            OR PASTE EMAIL CONTENT
+        </div>
+
+
+        <!-- EMAIL FORM -->
+        <form
+            method="POST"
+            enctype="multipart/form-data"
+            id="emailForm"
+        >
+
+            <textarea
+                name="email_text"
+                placeholder="Paste the complete email message here...
+Your email account requires immediate verification..."
+            >{{ email_text }}</textarea>
+
+
+            <button
+                type="submit"
+                class="scan-button"
+            >
+                🔎 Analyze Email
+            </button>
+
+        </form>
+
+
+        <!-- RESULTS -->
+
+        {% if prediction %}
+
+        <div class="result-card
+            {% if risk_level == 'High Risk' %}
+                phishing
+            {% elif risk_level == 'Medium Risk' %}
+                medium
+            {% else %}
+                safe
+            {% endif %}
+        ">
+
+            <div class="result-title">
+
+                {% if risk_level == "High Risk" %}
+                    ⚠️ High Risk Detected
+                {% elif risk_level == "Medium Risk" %}
+                    ⚠️ Medium Risk
+                {% else %}
+                    ✅ Email Appears Safe
+                {% endif %}
+
+            </div>
+
+            <div class="classification">
+                Machine Learning Classification:
+                <strong>{{ prediction }}</strong>
+            </div>
+
+        </div>
+
+
+        <!-- STATS -->
+
+        <div class="stats">
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Phishing Probability
+                </div>
+
+                <div class="score">
+                    {{ "%.2f"|format(phishing_probability) }}%
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Overall Risk Score
+                </div>
+
+                <div class="score">
+                    {{ risk_score }}/100
+                </div>
+
+                <div class="risk-level">
+
+                    {% if risk_level == "High Risk" %}
+                        🔴 High Risk
+                    {% elif risk_level == "Medium Risk" %}
+                        🟠 Medium Risk
+                    {% else %}
+                        🟢 Safe
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PROGRESS -->
+
+        <div class="progress-section">
+
+            <div class="progress-label">
+                <span>Phishing Probability</span>
+                <strong>
+                    {{ "%.2f"|format(phishing_probability) }}%
+                </strong>
+            </div>
+
+            <div class="progress-bar">
+
+                <div
+                    class="progress-fill"
+                    style="width: {{ phishing_probability }}%;">
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- INDICATORS -->
+
+        <div class="details">
+
+            <h2>
+                🚨 Detected Security Indicators
+            </h2>
+
+            {% if indicators %}
+
+            <ul class="indicator-list">
+
+                {% for indicator in indicators %}
+
+                <li>
+                    ⚠️ {{ indicator }}
+                </li>
+
+                {% endfor %}
+
+            </ul>
+
+            {% else %}
+
+            <div class="no-indicators">
+                ✅ No major rule-based phishing indicators were detected.
+            </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- URLS -->
+
+        {% if urls_found %}
+
+        <div class="url-box">
+
+            <h2>
+                🔗 URLs Detected
+            </h2>
+
+            <ul>
+
+                {% for url in urls_found %}
+
+                <li>
+                    {{ url }}
+                </li>
+
+                {% endfor %}
+
+            </ul>
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- RECOMMENDATION -->
+
+        {% if recommendation %}
+
+        <div class="recommendation">
+
+            <h2>
+                🛡️ Security Recommendation
+            </h2>
+
+            <p>
+                {{ recommendation }}
+            </p>
+
+        </div>
+
+        {% endif %}
+
+        {% endif %}
+
+    </div>
+
+
+    <footer>
+        PhishGuard AI • Machine Learning Based Phishing Detection System
+    </footer>
+
+</main>
+
+</body>
+</html>
