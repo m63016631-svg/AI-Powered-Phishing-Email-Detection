@@ -114,11 +114,11 @@ The final risk score is calculated by combining the machine learning phishing pr
 ### Risk Levels
 
 | Risk Score | Risk Level  |
-
+|------------|-------------|
 | 70–100     | High Risk   |
-
+|------------|-------------|
 | 40–69      | Medium Risk |
-
+|------------|-------------|
 | 0–39       | Safe        |
 |------------|-------------|
 
